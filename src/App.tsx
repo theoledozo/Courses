@@ -1,28 +1,42 @@
+import React, { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import ShoppingList from './components/ShoppingList';
+import RecipeGenerator from './components/RecipeGenerator';
+import { ListChecks, ChefHat } from 'lucide-react';
 
- import React, { useState } from 'react';
- import { Toaster } from 'react-hot-toast';
- import ShoppingList from './components/ShoppingList';
--import RecipeGenerator from './components/RecipeGenerator';
-+import Inventory from './components/Inventory';
-+import RecipeGenerator from './components/RecipeGenerator';
- import { ListChecks, ChefHat } from 'lucide-react';
- 
- function App() {
--  const [activeTab, setActiveTab] = useState<'shopping' | 'recipes'>('shopping');
-+  const [activeTab, setActiveTab] = useState<'shopping' | 'recipes' | 'inventory'>('shopping');
- 
-   return (
-     <div className="min-h-screen bg-gray-100">
+function App() {
+  const [activeTab, setActiveTab] = useState<'shopping' | 'recipes'>('shopping');
 
-       </div>
- 
-       <div className="pb-20">
--        {activeTab === 'inventory' ? <Inventory /> : <ShoppingList />}
-+        {activeTab === 'shopping' && <ShoppingList />}
-+        {activeTab === 'recipes' && <RecipeGenerator />}
-+        {activeTab === 'inventory' && <Inventory />}
-+        {/* Default case for unexpected tab states */}
-+        {activeTab !== 'shopping' && activeTab !== 'recipes' && activeTab !== 'inventory' && <p>Invalid tab selected.</p>}
-       </div>
-     </div>
-   );
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <Toaster position="top-center" />
+      
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around p-2">
+        <button
+          onClick={() => setActiveTab('shopping')}
+          className={`flex flex-col items-center p-2 rounded-lg ${
+            activeTab === 'shopping' ? 'text-blue-500' : 'text-gray-500'
+          }`}
+        >
+          <ListChecks size={24} />
+          <span className="text-sm">Courses</span>
+        </button>
+        <button
+          onClick={() => setActiveTab('recipes')}
+          className={`flex flex-col items-center p-2 rounded-lg ${
+            activeTab === 'recipes' ? 'text-orange-500' : 'text-gray-500'
+          }`}
+        >
+          <ChefHat size={24} />
+          <span className="text-sm">Recettes</span>
+        </button>
+      </div>
+
+      <div className="pb-20">
+        {activeTab === 'shopping' ? <ShoppingList /> : <RecipeGenerator />}
+      </div>
+    </div>
+  );
+}
+
+export default App;
