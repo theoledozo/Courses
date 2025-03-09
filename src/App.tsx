@@ -1,4 +1,3 @@
-@@ -1,7 +1,7 @@
  import React, { useState } from 'react';
  import { Toaster } from 'react-hot-toast';
  import ShoppingList from './components/ShoppingList';
@@ -7,7 +6,7 @@
  import { ListChecks, ChefHat } from 'lucide-react';
 
  function App() {
-@@ -13,13 +13,13 @@
+
        
        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around p-2">
          <button
@@ -24,7 +23,7 @@
          </button>
          <button
            onClick={() => setActiveTab('recipes')}
-@@ -34,7 +34,7 @@
+
        </div>
 
        <div className="pb-20">
